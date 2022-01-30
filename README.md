@@ -56,8 +56,8 @@ document.getElementById('content').innerHTML = annotator.unannotateAll(annotatio
 | html | string | The HTML string within which a piece of text can be annotated. |
 
 ## Search options
-#### search(str, *options = {}*)
-#### searchAll(str, *options = {}*)
+#### search(str, *options = {trim, caseSensitive, prefix, postfix}*)
+#### searchAll(str, *options = {trim, caseSensitive, prefix, postfix}*)
 | Prop | Type | Description |
 | ---- | ---- | ---- |
 | trim | boolean | Whether to trim the piece of text to be annotated. Default is *true*. |
@@ -66,8 +66,8 @@ document.getElementById('content').innerHTML = annotator.unannotateAll(annotatio
 | postfix | string | A string AFTER the piece of text to be annotated. Default is ''. |
 
 ## Annotate options
-#### annotate(annotationIndex, *options = {}*)
-#### annotationAll(annotationIndexes, *options = {}*)
+#### annotate(annotationIndex, *options = {tagName, baseClassName, classPattern}*)
+#### annotationAll(annotationIndexes, *options = {tagName, baseClassName, classPattern}*)
 #### unannotate(annotationIndex)
 #### unannotateAll(annotationIndexes)
 | Prop | Type | Description |
