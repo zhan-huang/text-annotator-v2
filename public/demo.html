@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>Demo of text-annotator v2</title>
+    <script src="./js/text-annotator-v2.min.js"></script>
+    <script>
+      window.onload = function() {
+        // create annotator by passing the html to be annotated
+        var annotator = new TextAnnotator(document.getElementById('content').innerHTML)
+
+        // search for the plain text within the html
+        var annotationIndex = annotator.search('JavaScript is the world\'s most popular programming language.JavaScript is the programming language of the Web.')
+        // annotate the text if finding it
+        if (annotationIndex !== -1) {
+          document.getElementById('content').innerHTML = annotator.annotate(annotationIndex)
+        }
+
+        // search for and annotate all occurances of "JavaScript" in the HTML
+        var annotationIndexes = annotator.searchAll('Javascript')
+        // annotate all occurances of "JavaScript" if finding it
+        if (annotationIndexes.length) {
+          document.getElementById('content').innerHTML = annotator.annotateAll(annotationIndexes)
+        }
+
+        // unannotate all in 3 seconds
+        setTimeout(function() {
+          document.getElementById('content').innerHTML = annotator.unannotate(annotationIndex)
+          document.getElementById('content').innerHTML = annotator.unannotateAll(annotationIndexes)
+        }, 3000)
+
+      }
+    </script>
+    <style>
+      .annotation {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content"><p><i>JavaScript</i> is the <b>world's most popular programming language</b>.</p><p><i>JavaScript</i> is the programming language of the Web. JavaScript is easy to learn.</p></div>
+  </body>
+</html>
