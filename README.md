@@ -53,7 +53,7 @@ document.getElementById('content').innerHTML = annotator.unannotateAll(annotatio
 #### new TextAnnotator(html)
 | Param | Type | Description |
 | ---- | ---- | ---- |
-| html | string | The HTML string within which a piece of text can be annotated. |
+| html | string | The HTML string within which a piece of text can be annotated |
 
 ## Search options
 #### search(str, *options = {trim, caseSensitive, prefix, postfix}*)
@@ -72,7 +72,7 @@ document.getElementById('content').innerHTML = annotator.unannotateAll(annotatio
 #### unannotateAll(annotationIndexes)
 | Prop | Type | Description |
 | ---- | ---- | ---- |
-| tagName | string | The tag name of the annotation tag. Default is *span* so that the tag is *<span ...>*. |
+| tagName | string | The name of the annotation tag. Default is *span* so that the tag is *<span ...>*. |
 | baseClassName | string | The base class name of the annotation tag. Default is *annotation* so that the tag is *<span class="annotation" ...>*. |
 | classPattern | string | The pattern of the class used as the ID of the annotation. Default is *annotation-* so that the tag is *<span class="annotation-[annotation]" ...>*. |
 
