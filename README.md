@@ -74,7 +74,7 @@ document.getElementById('content').innerHTML = annotator.unannotateAll(annotatio
 | ---- | ---- | ---- |
 | tagName | string | The name of the annotation tag. Default is *span* so that the tag is *<span ...>*. |
 | baseClassName | string | The base class name of the annotation tag. Default is *annotation* so that the tag is *<span class="annotation" ...>*. |
-| classPattern | string | The pattern of the class used as the ID of the annotation. Default is *annotation-* so that the tag is *<span class="annotation-[annotation]" ...>*. |
+| classPattern | string | The pattern of the class used as the ID of the annotation. Default is *annotation-* so that the tag is *<span class="annotation annotation-[annotationIndex]" ...>*. |
 
 ## Comparing text-annotator-v2 and text-annotator
 TBC
