@@ -17,7 +17,7 @@ import TextAnnotator from 'text-annotator-v2'
 ```
 ### include it into the head tag
 ```
-<script src="public/js/text-annotator.min.js"></script>
+<script src="public/js/text-annotator-v2.min.js"></script>
 ```
 
 ## An example of the usage
@@ -49,15 +49,15 @@ document.getElementById('content').innerHTML = annotator.unannotate(annotationIn
 document.getElementById('content').innerHTML = annotator.unannotateAll(annotationIndexes)
 ```
 
-## Constructor options
+## Constructor parameter
 #### new TextAnnotator(html)
-| Prop | Type | Description |
+| Param | Type | Description |
 | ---- | ---- | ---- |
 | html | string | The HTML string within which a piece of text can be annotated. |
 
 ## Search options
-#### search(str, *options*)
-#### searchAll(str, *options*)
+#### search(str, *options = {}*)
+#### searchAll(str, *options = {}*)
 | Prop | Type | Description |
 | ---- | ---- | ---- |
 | trim | boolean | Whether to trim the piece of text to be annotated. Default is *true*. |
@@ -66,8 +66,8 @@ document.getElementById('content').innerHTML = annotator.unannotateAll(annotatio
 | postfix | string | A string AFTER the piece of text to be annotated. Default is ''. |
 
 ## Annotate options
-#### annotate(annotationIndex, *options*)
-#### annotationAll(annotationIndexes, *options*)
+#### annotate(annotationIndex, *options = {}*)
+#### annotationAll(annotationIndexes, *options = {}*)
 #### unannotate(annotationIndex)
 #### unannotateAll(annotationIndexes)
 | Prop | Type | Description |
