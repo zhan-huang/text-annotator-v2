@@ -52,13 +52,13 @@ document.getElementById('content').innerHTML = annotator.unannotateAll(annotatio
 /* <div id="content"><p><i>JavaScript</i> is the <b>world's most popular programming language</b>.</p><p><i>JavaScript</i> is the programming language of the Web. JavaScript is easy to learn.</p></div> */
 ```
 
-## Constructor parameter
+## Constructor
 #### new TextAnnotator(html)
 | Param | Type | Description |
 | ---- | ---- | ---- |
 | html | string | The HTML string within which a piece of text can be annotated |
 
-## Search options
+## Search APIs
 #### search(str, *options = {trim, caseSensitive, prefix, postfix}*)
 #### searchAll(str, *options = {trim, caseSensitive, prefix, postfix}*)
 | Prop | Type | Description |
@@ -68,7 +68,7 @@ document.getElementById('content').innerHTML = annotator.unannotateAll(annotatio
 | prefix | string | A string BEFORE the piece of text to be annotated. Default is ''. |
 | postfix | string | A string AFTER the piece of text to be annotated. Default is ''. |
 
-## Annotate options
+## Annotate APIs
 #### annotate(annotationIndex, *options = {tagName, baseClassName, classPattern}*)
 #### annotationAll(annotationIndexes, *options = {tagName, baseClassName, classPattern}*)
 #### unannotate(annotationIndex)
