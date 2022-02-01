@@ -23,11 +23,11 @@ import TextAnnotator from 'text-annotator-v2'
 ## An example of the usage
 ```javascript
 /*
-  below is the HTML
-  <div id="content">
-    <p><i>JavaScript</i> is the <b>world's most popular programming language</b>.</p>
-    <p><i>JavaScript</i> is the programming language of the Web. JavaScript is easy to learn.</p>
-  </div>
+below is the HTML
+<div id="content">
+  <p><i>JavaScript</i> is the <b>world's most popular programming language</b>.</p>
+  <p><i>JavaScript</i> is the programming language of the Web. JavaScript is easy to learn.</p>
+</div>
 */
 
 // create an instance of TextAnnotator by passing the html to be annotated
@@ -39,10 +39,10 @@ var annotationIndex = annotator.search('JavaScript is the programming language o
 if (annotationIndex !== -1) {
   document.getElementById('content').innerHTML = annotator.annotate(annotationIndex)
 /*
-  <div id="content">
-    <p><i>JavaScript</i> is the <b>world's most popular programming language</b>.</p>
-    <p><i><span class="annotation annotation-0">JavaScript</span></i><span class="annotation annotation-0"> is the programming language of the Web.</span> JavaScript is easy to learn.</p>
-  </div>
+<div id="content">
+  <p><i>JavaScript</i> is the <b>world's most popular programming language</b>.</p>
+  <p><i><span class="annotation annotation-0">JavaScript</span></i><span class="annotation annotation-0"> is the programming language of the Web.</span> JavaScript is easy to learn.</p>
+</div>
 */
 }
 
@@ -52,10 +52,10 @@ var annotationIndexes = annotator.searchAll('JavaScript')
 if (annotationIndexes.length) {
   document.getElementById('content').innerHTML = annotator.annotateAll(annotationIndexes)
 /*
-  <div id="content">
-    <p><i><span class="annotation annotation-1">JavaScript</span></i> is the <b>world's most popular programming language</b>.</p>
-    <p><i><span class="annotation annotation-0"><span class="annotation annotation-2">JavaScript</span></span></i><span class="annotation annotation-0"> is the programming language of the Web.</span> <span class="annotation annotation-3">JavaScript</span> is easy to learn.</p>
-  </div>
+<div id="content">
+  <p><i><span class="annotation annotation-1">JavaScript</span></i> is the <b>world's most popular programming language</b>.</p>
+  <p><i><span class="annotation annotation-0"><span class="annotation annotation-2">JavaScript</span></span></i><span class="annotation annotation-0"> is the programming language of the Web.</span> <span class="annotation annotation-3">JavaScript</span> is easy to learn.</p>
+</div>
 */
 }
 
@@ -63,10 +63,10 @@ if (annotationIndexes.length) {
 document.getElementById('content').innerHTML = annotator.unannotate(annotationIndex)
 document.getElementById('content').innerHTML = annotator.unannotateAll(annotationIndexes)
 /*
-  <div id="content">
-    <p><i>JavaScript</i> is the <b>world's most popular programming language</b>.</p>
-    <p><i>JavaScript</i> is the programming language of the Web. JavaScript is easy to learn.</p>
-  </div>
+<div id="content">
+  <p><i>JavaScript</i> is the <b>world's most popular programming language</b>.</p>
+  <p><i>JavaScript</i> is the programming language of the Web. JavaScript is easy to learn.</p>
+</div>
 */
 ```
 
