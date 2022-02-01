@@ -4,7 +4,7 @@ The annotation process is:
 
 1. **Search**: Search for a piece of plain text in the HTML; if finding it, store its location identified by an index and then return the index for later annotation
 2. **Annotate**: Annotate the found text given its index<br />
-It can be seen that in order to annotate a piece of text, two steps, **search** and **annotate**, are taken. The idea of decomposing the annotation process into the two steps is to allow more flexibility, e.g., the user can search for all pieces of text first, and then annotate (some of) them later when required (e.g., when clicking a button). <br />
+It can be seen that in order to annotate a piece of text, two steps, **search** and **annotate**, are taken. The idea of decomposing the annotation process into the two steps is to allow more flexibility, e.g., the user can search for all pieces of text first, and then annotate them later when required (e.g., when clicking a button). <br />
 
 *text-annotator-v2* can be used in the browser or the Node.js server.<br />
 *text-annotator-v2* evolved from [text-annotator](https://github.com/zhan-huang/text-annotator). See *Comparing text-annotator-v2 and text-annotator* at the end of this document.
@@ -33,7 +33,7 @@ below is the HTML
 // create an instance of TextAnnotator by passing the html to be annotated
 var annotator = new TextAnnotator(document.getElementById('content').innerHTML)
 
-// search for text "JavaScript is the world's most popular programming language.JavaScript is the programming language of the Web." within the HTML
+// search for text "JavaScript is the programming language of the Web." within the HTML
 var annotationIndex = annotator.search('JavaScript is the programming language of the Web.')
 // annotate the text if finding it
 if (annotationIndex !== -1) {
