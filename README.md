@@ -24,18 +24,26 @@ import TextAnnotator from 'text-annotator-v2'
 ```javascript
 /*
   below is the HTML
-  <div id="content"><p><i>JavaScript</i> is the <b>world's most popular programming language</b>.</p><p><i>JavaScript</i> is the programming language of the Web. JavaScript is easy to learn.</p></div>
+  <div id="content">
+    <p><i>JavaScript</i> is the <b>world's most popular programming language</b>.</p>
+    <p><i>JavaScript</i> is the programming language of the Web. JavaScript is easy to learn.</p>
+  </div>
 */
 
 // create an instance of TextAnnotator by passing the html to be annotated
 var annotator = new TextAnnotator(document.getElementById('content').innerHTML)
 
 // search for text "JavaScript is the world's most popular programming language.JavaScript is the programming language of the Web." within the HTML
-var annotationIndex = annotator.search('JavaScript is the world\'s most popular programming language.JavaScript is the programming language of the Web.')
+var annotationIndex = annotator.search('JavaScript is the programming language of the Web.')
 // annotate the text if finding it
 if (annotationIndex !== -1) {
   document.getElementById('content').innerHTML = annotator.annotate(annotationIndex)
-  /* <div id="content"><p><i><span class="annotation annotation-0">JavaScript</span></i><span class="annotation annotation-0"> is the </span><b><span class="annotation annotation-0">world's most popular programming language</span></b><span class="annotation annotation-0">.</span></p><p><i><span class="annotation annotation-0">JavaScript</span></i><span class="annotation annotation-0"> is the programming language of the Web.</span> JavaScript is easy to learn.</p></div> */
+/*
+  <div id="content">
+    <p><i>JavaScript</i> is the <b>world's most popular programming language</b>.</p>
+    <p><i><span class="annotation annotation-0">JavaScript</span></i><span class="annotation annotation-0"> is the programming language of the Web.</span> JavaScript is easy to learn.</p>
+  </div>
+*/
 }
 
 // search for all occurances of "JavaScript" in the HTML
@@ -43,13 +51,23 @@ var annotationIndexes = annotator.searchAll('JavaScript')
 // annotate all the found occurances of 'Javascript' given their indexes
 if (annotationIndexes.length) {
   document.getElementById('content').innerHTML = annotator.annotateAll(annotationIndexes)
-  /* <div id="content"><p><i><span class="annotation annotation-0"><span class="annotation annotation-1">JavaScript</span></span></i><span class="annotation annotation-0"> is the </span><b><span class="annotation annotation-0">world's most popular programming language</span></b><span class="annotation annotation-0">.</span></p><p><i><span class="annotation annotation-0"><span class="annotation annotation-2">JavaScript</span></span></i><span class="annotation annotation-0"> is the programming language of the Web.</span> <span class="annotation annotation-3">JavaScript</span> is easy to learn.</p></div> */
+/*
+  <div id="content">
+    <p><i><span class="annotation annotation-1">JavaScript</span></i> is the <b>world's most popular programming language</b>.</p>
+    <p><i><span class="annotation annotation-0"><span class="annotation annotation-2">JavaScript</span></span></i><span class="annotation annotation-0"> is the programming language of the Web.</span> <span class="annotation annotation-3">JavaScript</span> is easy to learn.</p>
+  </div>
+*/
 }
 
 // unannotate all the previously annotated text
 document.getElementById('content').innerHTML = annotator.unannotate(annotationIndex)
 document.getElementById('content').innerHTML = annotator.unannotateAll(annotationIndexes)
-/* <div id="content"><p><i>JavaScript</i> is the <b>world's most popular programming language</b>.</p><p><i>JavaScript</i> is the programming language of the Web. JavaScript is easy to learn.</p></div> */
+/*
+  <div id="content">
+    <p><i>JavaScript</i> is the <b>world's most popular programming language</b>.</p>
+    <p><i>JavaScript</i> is the programming language of the Web. JavaScript is easy to learn.</p>
+  </div>
+*/
 ```
 
 ## Constructor

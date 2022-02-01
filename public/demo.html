@@ -8,7 +8,8 @@
         var annotator = new TextAnnotator(document.getElementById('content').innerHTML)
 
         // search for the plain text within the html
-        var annotationIndex = annotator.search('JavaScript is the world\'s most popular programming language.JavaScript is the programming language of the Web.')
+        var annotationIndex = annotator.search('JavaScript is the programming language of the Web.')
+        console.log(annotator.text)
         // annotate the text if finding it
         if (annotationIndex !== -1) {
           document.getElementById('content').innerHTML = annotator.annotate(annotationIndex)
@@ -35,6 +36,9 @@
     </style>
   </head>
   <body>
-    <div id="content"><p><i>JavaScript</i> is the <b>world's most popular programming language</b>.</p><p><i>JavaScript</i> is the programming language of the Web. JavaScript is easy to learn.</p></div>
+    <div id="content">
+      <p><i>JavaScript</i> is the <b>world's most popular programming language</b>.</p>
+      <p><i>JavaScript</i> is the programming language of the Web. JavaScript is easy to learn.</p>
+    </div>
   </body>
 </html>
