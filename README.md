@@ -7,7 +7,7 @@ The annotation process is:
 It can be seen that in order to annotate a piece of text, two steps, **search** and **annotate**, are taken. The idea of decomposing the annotation process into the two steps is to allow more flexibility, e.g., the user can search for all pieces of text first, and then annotate them later when required (e.g., when clicking a button). <br />
 
 *text-annotator-v2* can be used in the browser or the Node.js server.<br />
-*text-annotator-v2* evolved from [text-annotator](https://github.com/zhan-huang/text-annotator). See *Comparing text-annotator-v2 and text-annotator* at the end of this document.
+*text-annotator-v2* evolved from [text-annotator](https://www.npmjs.com/package/text-annotator). See [Comparing text-annotator-v2 and text-annotator](#comparing-text-annotator-v2-and-text-annotator).
 
 ## Import
 ### install it via npm
