@@ -98,7 +98,21 @@ document.getElementById('content').innerHTML = annotator.unannotateAll(annotatio
 | classPattern | string | The pattern of the class used as the ID of the annotation. Default is *annotation-* so that the tag is *<span class="annotation annotation-[annotationIndex]" ...>*. |
 
 ## Comparing text-annotator-v2 and text-annotator
-TBC
+1. *text-annotator* can only use a single pair of annotation tags to annotate a piece of text, while *text-annotator-v2* can use any number of pairs of annotation tags depending on how "complex" the text is presented using HTML tags. For instance, given the following html:
+```
+<div>This is an <i>apple</i></div>
+```
+If we want to annotate *an apple*, *text-annotator* will only use a single annotation tag pair
+```
+<div>This is <...>an <i>apple</i></...></div>
+```
+In contrast, *text-annotator-v2* will use two annotation tag pairs
+```
+<div>This is <...>an </...><i><...>apple</...></i></div>
+```
+It seems *text-annotator* can provide a simpler solution in this case. However, *text-annotator-v2* aims to give a correct solution in all cases. For instance, if *an apple* is surrounding by a pair of block tags, such as *p*, instead of *i*, annotating *an apple* using non-block tag such as *span* or *mark* will break the html structure.
+
+2. *text-annotator-v2* offers a "smaller" solution: the compressed file is only 3.66kb. In contrast, the the compressed file of *text-annotator* is 90kb.
 
 ## Contact
 [Zhan Huang](mailto:z2hm@outlook.com "Zhan Huang")
