@@ -141,7 +141,6 @@ test('annotate the text again after unannotating it', () => {
   textAnnotator.annotate(textAnnotator.search('Zhan Huang'))
   textAnnotator.annotate(textAnnotator.search('food and sports'))
   textAnnotator.unannotateAll([0, 1])
-  console.log(textAnnotator.html)
   const annotatedHtml = textAnnotator.annotate(0)
   expect(annotatedHtml).toBe(
     '"I am <b><i><span class="annotation annotation-0">Zhan Huang</span></i></b>, a <b>frontend developer</b> in EMBL-EBI. I like food and sports. My favourite food is udon noodles." - Zhan HUANG'
@@ -151,9 +150,68 @@ test('annotate the text again after unannotating it', () => {
 test('annotate document without html tags', () => {
   const textAnnotator = new TextAnnotator('I am Zhan Huang')
   const annotatedHtml = textAnnotator.annotate(
-    textAnnotator.search('Zhan Huang')
+    textAnnotator.search(' zhan huang ')
   )
   expect(annotatedHtml).toBe(
     'I am <span class="annotation annotation-0">Zhan Huang</span>'
+  )
+})
+
+test('do not trim the search terms', () => {
+  const textAnnotator = new TextAnnotator('I am Zhan Huang')
+  const annotationIndex = textAnnotator.search(' zhan huang ', { trim: false })
+
+  expect(annotationIndex).toBe(-1)
+})
+
+test('make the search case sensitive', () => {
+  const textAnnotator = new TextAnnotator('I am Zhan Huang')
+  const annotationIndex = textAnnotator.search('zhan huang', {
+    caseSensitive: true,
+  })
+
+  expect(annotationIndex).toBe(-1)
+})
+
+test('add prefix and postfix of the search terms', () => {
+  const textAnnotator = new TextAnnotator('I am Zhan Huang')
+  const annotationIndex = textAnnotator.search('zhan huang', {
+    prefix: 'am ',
+    postfix: '.',
+  })
+
+  expect(annotationIndex).toBe(-1)
+})
+
+test('annotate using mark tags', () => {
+  const textAnnotator = new TextAnnotator('I am Zhan Huang')
+  const annotatedHtml = textAnnotator.annotate(
+    textAnnotator.search('zhan huang'),
+    { tagName: 'mark' }
+  )
+  expect(annotatedHtml).toBe(
+    'I am <mark class="annotation annotation-0">Zhan Huang</mark>'
+  )
+})
+
+test('annotate using a different base class name', () => {
+  const textAnnotator = new TextAnnotator('I am Zhan Huang')
+  const annotatedHtml = textAnnotator.annotate(
+    textAnnotator.search('zhan huang'),
+    { baseClassName: 'highlight' }
+  )
+  expect(annotatedHtml).toBe(
+    'I am <span class="highlight annotation-0">Zhan Huang</span>'
+  )
+})
+
+test('annotate using a different class pattern', () => {
+  const textAnnotator = new TextAnnotator('I am Zhan Huang')
+  const annotatedHtml = textAnnotator.annotate(
+    textAnnotator.search('zhan huang'),
+    { classPattern: 'highlight-' }
+  )
+  expect(annotatedHtml).toBe(
+    'I am <span class="annotation highlight-0">Zhan Huang</span>'
   )
 })
