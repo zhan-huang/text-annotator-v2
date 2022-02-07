@@ -110,7 +110,14 @@ In contrast, *text-annotator-v2* will use two annotation tag pairs
 ```
 <div>This is <...>an </...><i><...>apple</...></i></div>
 ```
-It seems *text-annotator* can provide a simpler solution in this case. However, *text-annotator-v2* aims to give a correct solution in all cases. For instance, if *an apple* is surrounding by a pair of block tags, such as *p*, instead of *i*, annotating *an apple* using a single non-block tag pair such as *span* or *mark* will break the html structure.
+It seems *text-annotator* can provide a simpler solution in this case. However, *text-annotator-v2* aims to give a correct solution in all cases. For instance, if *an apple* is surrounding by a pair of block tags, such as *p*, instead of *i*, annotating *an apple* using a single non-block tag pair such as *span* or *mark* will break the html structure. Another example where more than one pair of annotatation tags is needed for annotation is:
+```
+<p>These are apples. We like eating them.</p><p>Today we ate ten!</p>
+```
+If we want to lightlight *We like eating them.Today we ate then!*, we have to use 2 pairs of annotation tags as follows:
+```
+<p>These are apples. <...>We like eating them.</...></p><p><...>Today we ate ten!</...></p>
+```
 
 2. *text-annotator-v2* offers a "smaller" solution: the compressed file is only 3.66kb. In contrast, the the compressed file of *text-annotator* is 90kb.
 
