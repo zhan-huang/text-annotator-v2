@@ -87,7 +87,7 @@ Two demo are also available on https://zealous-meitner-84f091.netlify.app/ and h
 | prefix | string | A string BEFORE the piece of text to be annotated. Default is ''. |
 | postfix | string | A string AFTER the piece of text to be annotated. Default is ''. |
 
-## Annotate APIs
+## Annotation APIs
 #### annotate(annotationIndex, *options = {tagName, baseClassName, classPattern}*)
 #### annotationAll(annotationIndexes, *options = {tagName, baseClassName, classPattern}*)
 #### unannotate(annotationIndex)
