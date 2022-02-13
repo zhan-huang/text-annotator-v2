@@ -20,7 +20,7 @@ import TextAnnotator from 'text-annotator-v2'
 <script src="public/js/text-annotator-v2.min.js"></script>
 ```
 
-## An example of the usage
+## Usage
 ```javascript
 /*
 below is the HTML
@@ -69,6 +69,7 @@ document.getElementById('content').innerHTML = annotator.unannotateAll(annotatio
 </div>
 */
 ```
+Two demo are also available on https://zealous-meitner-84f091.netlify.app/ and https://zealous-meitner-84f091.netlify.app/demo.html where you can check the source code and UI.
 
 ## Constructor
 #### new TextAnnotator(html)
