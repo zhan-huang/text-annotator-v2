@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <title>Demo of text-annotator v2</title>
+    <style>
+      #content {
+        width: 50%;
+        margin: 0 auto;
+      }
+      label {
+        font-weight: 600;
+      }
+      #html-input {
+        width: 100%;
+        height: 256px;
+      }
+      #annotation-input {
+        width: 100%;
+      }
+      .annotation {
+        background-color: yellow;
+      }
+    </style>
+    <script src="./js/text-annotator-v2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script>
+      // an example: https://europepmc.org/article/PMC/PMC8820867
+      window.onload = function() {
+        new Vue({
+          el: '#content',
+          data() {
+            return {
+              html: '',
+              textAnnotator: null,
+              onAnnotation: false,
+              logs: []
+            }
+          },
+          methods: {
+            confirmHTML() {
+              var input = this.$refs.htmlInput.value.trim()
+              if (input) {
+                this.html = input
+                this.textAnnotator = new TextAnnotator(input)
+                this.onAnnotation = true
+              } else {
+                alert('Please enter HTML.')
+              }
+            },
+            clearHTML() {
+              this.html = ''
+              this.$refs.htmlInput.value = ''
+              this.textAnnotator = null
+              this.onAnnotation = false
+              this.logs = []
+            },
+            annotate() {
+              var input = this.$refs.annotationInput.value.trim()
+              if (input) {
+                var annotationIndex = this.textAnnotator.search(input)
+                if (annotationIndex !== -1) {
+                  this.html = this.textAnnotator.annotate(annotationIndex)
+                  this.logs.push('<b>' + input + '</b> has been annotated. The annotation index is <b>' + annotationIndex + '</b>.')
+                } else {
+                  this.logs.push('<b>' + input + '</b> was not found in the HTML.')
+                }
+                this.$refs.annotationInput.value = ''
+              } else {
+                alert('Please enter text to be annotated.')
+              }
+            },
+            unannotate() {
+              var input = this.$refs.annotationIndexInput.value.trim()
+              if (input) {
+                let htmlAfterUnannotation = this.textAnnotator.unannotate(+input)
+                if (this.html === htmlAfterUnannotation) {
+                  this.logs.push('The annotation index <b>' + input + '</b> is no longer valid for unannotation.')
+                } else {
+                  this.html = htmlAfterUnannotation
+                  this.logs.push('The text corresponding to the annotation index <b>' + input + '</b> has been unannotated.')
+                }
+                this.$refs.annotationIndexInput.value = ''
+              } else {
+                alert('Please enter an annotation index.')
+              }
+            }
+          },
+          template: `
+            <div id="content">
+              <h1>Demo of text-annotator v2</h1>
+              <label for="html-input">Enter HTML here:</label><br />
+              <textarea id="html-input" ref="htmlInput" :disabled="onAnnotation"></textarea>
+              <div>
+                <button @click.prevent="confirmHTML" :disabled="onAnnotation">Confirm</button><br />
+                <button @click.prevent="clearHTML" :disabled="!html">Clear</button>
+              </div>
+              <template v-if="html">
+                <hr />
+                <label>The entered HTML is:</label>
+                <div v-html="html"></div>
+                <hr />
+                <label for="annotation-input">Enter text to be annotated here:</label><br />
+                <input type="text" id="annotation-input" ref="annotationInput"></text>
+                <div>
+                  <button @click.prevent="annotate">Annotate</button>
+                </div>
+                <label for="annotation-index-input">Enter the index whose corresponding annotation will be removed:</label><br />
+                <input type="text" id="annotation-index-input" ref="annotationIndexInput"></text>
+                <div>
+                  <button @click.prevent="unannotate">Unannotate</button>
+                </div>
+                <hr />
+                <label>Logs</label>
+                <ol>
+                  <li v-for="(log, index) in logs" :key="index" v-html="log"></li>
+                <ol>
+              </template>
+            </div>
+          `
+        })
+      }
+    </script>
+  </head>
+  <body>
+    <div id="content"></div>
+  </body>
+</html>
