@@ -13,7 +13,7 @@
         width: 100%;
         height: 256px;
       }
-      #annotation-input {
+      #annotation-input, #annotation-prefix-input, #annotation-postfix-input {
         width: 100%;
       }
       .annotation {
@@ -55,8 +55,10 @@
             },
             annotate() {
               var input = this.$refs.annotationInput.value.trim()
+              var prefix = this.$refs.annotationPrefixInput.value.trim()
+              var postfix = this.$refs.annotationPostfixInput.value.trim()
               if (input) {
-                var annotationIndex = this.textAnnotator.search(input)
+                var annotationIndex = this.textAnnotator.search(input, { prefix: prefix, postfix: postfix })
                 if (annotationIndex !== -1) {
                   this.html = this.textAnnotator.annotate(annotationIndex)
                   this.logs.push('<b>' + input + '</b> has been annotated. The annotation index is <b>' + annotationIndex + '</b>.')
@@ -101,7 +103,9 @@
                 <div v-html="html"></div>
                 <hr />
                 <label for="annotation-input">Enter text to be annotated here:</label><br />
-                <input type="text" id="annotation-input" ref="annotationInput"></text>
+                <input type="text" id="annotation-input" ref="annotationInput" placeholder="Text to be annotated..."></text>
+                <input type="text" id="annotation-prefix-input" ref="annotationPrefixInput" placeholder="Prefix (optional)"></text>
+                <input type="text" id="annotation-postfix-input" ref="annotationPostfixInput" placeholder="Postfix (optional)"></text>
                 <div>
                   <button @click.prevent="annotate">Annotate</button>
                 </div>
