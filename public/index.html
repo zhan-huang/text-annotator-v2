@@ -55,8 +55,8 @@
             },
             annotate() {
               var input = this.$refs.annotationInput.value.trim()
-              var prefix = this.$refs.annotationPrefixInput.value.trim()
-              var postfix = this.$refs.annotationPostfixInput.value.trim()
+              var prefix = this.$refs.annotationPrefixInput.value
+              var postfix = this.$refs.annotationPostfixInput.value
               if (input) {
                 var annotationIndex = this.textAnnotator.search(input, { prefix: prefix, postfix: postfix })
                 if (annotationIndex !== -1) {
