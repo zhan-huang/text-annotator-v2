@@ -3,10 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
 
 class TextAnnotator {
   constructor(html) {
+    this.html = '';
+    this.text = '';
+    this.tags = [];
+    this.annotations = [];
     this.html = html;
 
     const {
@@ -14,11 +17,8 @@ class TextAnnotator {
       tags
     } = this._stripHTMLTags(html);
 
-    this.text = text; // [{ index, length, isCloseTag, annotationIndex* }]; ordered by index
-
-    this.tags = tags; // [{ index, length }]; unordered
-
-    this.annotations = [];
+    this.text = text;
+    this.tags = tags;
   }
 
   search(searchText, {
@@ -206,7 +206,9 @@ class TextAnnotator {
 
   _stripHTMLTags(html) {
     let text = html;
-    const tags = [];
+    const tags = []; // elaborate it later
+    // 
+
     let tag;
     const tagRegEx = /<[^>]+>/;
 
@@ -272,5 +274,4 @@ class TextAnnotator {
 
 }
 
-var _default = TextAnnotator;
-exports.default = _default;
+exports.default = TextAnnotator;

@@ -1,23 +1,49 @@
+type Location = {
+  index: number,
+  length: number
+}
+
+type Tag = Location & {
+  isCloseTag?: boolean,
+  annotationIndex?: number
+}
+
+type SearchOptions = {
+  prefix?: string,
+  postfix?: string,
+  trim?: boolean,
+  caseSensitive?: boolean
+  offset?: number
+}
+
+type AnnotateOptions = {
+  tagName?: string,
+  baseClassName?: string,
+  classPattern?: string
+}
+
 class TextAnnotator {
-  constructor(html) {
+  private html = ''
+  private text = ''
+  private tags: Tag[] = []
+  private annotations: Location[] = []
+
+  constructor(html: string) {
     this.html = html
     const { text, tags } = this._stripHTMLTags(html)
     this.text = text
-    // [{ index, length, isCloseTag, annotationIndex* }]; ordered by index
     this.tags = tags
-    // [{ index, length }]; unordered
-    this.annotations = []
   }
 
   search(
-    searchText,
+    searchText: string,
     {
       prefix = '',
       postfix = '',
       trim = true,
       caseSensitive = false,
       offset = 0,
-    } = {}
+    }: SearchOptions = {}
   ) {
     const { text, annotations } = this
     let str = prefix + searchText + postfix
@@ -44,7 +70,7 @@ class TextAnnotator {
         }) - 1
   }
 
-  searchAll(searchText, options) {
+  searchAll(searchText: string, options: SearchOptions) {
     let offset = 0
     const annotationIndexes = []
     let annotationIndex = -1
@@ -62,12 +88,12 @@ class TextAnnotator {
   }
 
   annotate(
-    annotationIndex,
+    annotationIndex: number,
     {
       tagName = 'span',
       baseClassName = 'annotation',
       classPattern = 'annotation-',
-    } = {}
+    }: AnnotateOptions = {}
   ) {
     const { tags, annotations, _insert, _binaryInsert } = this
     const annotation = annotations[annotationIndex]
@@ -154,16 +180,16 @@ class TextAnnotator {
     return this.html
   }
 
-  annotateAll(annotationIndexes, options) {
+  annotateAll(annotationIndexes: number[], options: AnnotateOptions) {
     annotationIndexes.forEach((annotationIndex) => {
       this.annotate(annotationIndex, options)
     })
     return this.html
   }
 
-  unannotate(annotationIndex) {
+  unannotate(annotationIndex: number) {
     // annotatorIndexesInTags amd annotators have the same size
-    const annotatorIndexesInTags = []
+    const annotatorIndexesInTags: number[] = []
     const annotators = this.tags.filter((tag, index) => {
       if (tag.annotationIndex === annotationIndex) {
         annotatorIndexesInTags.push(index)
@@ -213,7 +239,7 @@ class TextAnnotator {
     return this.html
   }
 
-  unannotateAll(annotationIndexes) {
+  unannotateAll(annotationIndexes: number[]) {
     annotationIndexes.forEach((annotationIndex) => {
       this.unannotate(annotationIndex)
     })
@@ -221,11 +247,13 @@ class TextAnnotator {
   }
 
   // pure function
-  _stripHTMLTags(html) {
+  _stripHTMLTags(html: string) {
     let text = html
     const tags = []
-
-    let tag
+    
+    // elaborate it later
+    // 
+    let tag: any
     const tagRegEx = /<[^>]+>/
     while ((tag = text.match(tagRegEx))) {
       text = text.replace(tag, '')
@@ -240,12 +268,12 @@ class TextAnnotator {
   }
 
   // pure function
-  _insert(str1, str2, index) {
+  _insert(str1: string, str2: string, index: number) {
     return str1.slice(0, index) + str2 + str1.slice(index)
   }
 
   // pure function
-  _binaryInsert(arr, val, comparator) {
+  _binaryInsert(arr: any[], val: any, comparator: (a: any, b: any) => any) {
     if (arr.length === 0 || comparator(arr[0], val) >= 0) {
       arr.splice(0, 0, val)
       return arr
