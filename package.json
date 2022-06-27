@@ -7,8 +7,7 @@
     "lint": "./node_modules/.bin/eslint src/** test/** --fix",
     "build": "babel dist -d build",
     "build-min": "webpack --config webpack.config.js",
-    "test": "jest",
-    "dev": "tsc --watch"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -26,7 +25,6 @@
   },
   "homepage": "https://github.com/zhan-huang/text-annotator-v2#readme",
   "devDependencies": {
-    "pre-commit": "^1.2.2",
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.18.5",
     "@babel/preset-env": "^7.18.2",
@@ -54,8 +52,5 @@
         }
       ]
     ]
-  },
-  "pre-commit": [
-    "test"
-  ]
+  }
 }

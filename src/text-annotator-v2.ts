@@ -252,7 +252,6 @@ class TextAnnotator {
     const tags = []
     
     // elaborate it later
-    // 
     let tag: any
     const tagRegEx = /<[^>]+>/
     while ((tag = text.match(tagRegEx))) {
