@@ -1,3 +1,9 @@
 "use strict";
 
-module.exports = require('./text-annotator-v2.js').default;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+const TextAnnotator = require("./text-annotator-v2.js");
+
+module.exports = TextAnnotator.default;

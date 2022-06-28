@@ -252,10 +252,10 @@ class TextAnnotator {
     const tags = []
     
     // elaborate it later
-    let tag: any
+    let tag: RegExpMatchArray
     const tagRegEx = /<[^>]+>/
     while ((tag = text.match(tagRegEx))) {
-      text = text.replace(tag, '')
+      text = text.replace(tag[0], '')
       tags.push({
         index: tag.index,
         length: tag[0].length,
@@ -272,7 +272,7 @@ class TextAnnotator {
   }
 
   // pure function
-  _binaryInsert(arr: any[], val: any, comparator: (a: any, b: any) => any) {
+  _binaryInsert(arr: Tag[], val: Tag, comparator: (a: {index: number}, b: {index: number}) => number) {
     if (arr.length === 0 || comparator(arr[0], val) >= 0) {
       arr.splice(0, 0, val)
       return arr

@@ -181,11 +181,10 @@ class TextAnnotator {
         let text = html;
         const tags = [];
         // elaborate it later
-        // 
         let tag;
         const tagRegEx = /<[^>]+>/;
         while ((tag = text.match(tagRegEx))) {
-            text = text.replace(tag, '');
+            text = text.replace(tag[0], '');
             tags.push({
                 index: tag.index,
                 length: tag[0].length,
