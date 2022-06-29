@@ -44,7 +44,7 @@ class TextAnnotator {
       caseSensitive = false,
       offset = 0,
     }: SearchOptions = {}
-  ) {
+  ): number {
     const { text, annotations } = this
     let str = prefix + searchText + postfix
     str = trim ? str.trim() : str
@@ -70,7 +70,7 @@ class TextAnnotator {
         }) - 1
   }
 
-  searchAll(searchText: string, options: SearchOptions) {
+  searchAll(searchText: string, options: SearchOptions): number[] {
     let offset = 0
     const annotationIndexes = []
     let annotationIndex = -1
@@ -94,7 +94,7 @@ class TextAnnotator {
       baseClassName = 'annotation',
       classPattern = 'annotation-',
     }: AnnotateOptions = {}
-  ) {
+  ): string {
     const { tags, annotations, _insert, _binaryInsert } = this
     const annotation = annotations[annotationIndex]
     // [start, end, offset]
@@ -180,14 +180,14 @@ class TextAnnotator {
     return this.html
   }
 
-  annotateAll(annotationIndexes: number[], options: AnnotateOptions) {
+  annotateAll(annotationIndexes: number[], options: AnnotateOptions): string {
     annotationIndexes.forEach((annotationIndex) => {
       this.annotate(annotationIndex, options)
     })
     return this.html
   }
 
-  unannotate(annotationIndex: number) {
+  unannotate(annotationIndex: number): string {
     // annotatorIndexesInTags amd annotators have the same size
     const annotatorIndexesInTags: number[] = []
     const annotators = this.tags.filter((tag, index) => {
@@ -239,7 +239,7 @@ class TextAnnotator {
     return this.html
   }
 
-  unannotateAll(annotationIndexes: number[]) {
+  unannotateAll(annotationIndexes: number[]): string {
     annotationIndexes.forEach((annotationIndex) => {
       this.unannotate(annotationIndex)
     })
@@ -247,7 +247,7 @@ class TextAnnotator {
   }
 
   // pure function
-  _stripHTMLTags(html: string) {
+  _stripHTMLTags(html: string): { text: string, tags: Tag[] } {
     let text = html
     const tags = []
     
@@ -267,7 +267,7 @@ class TextAnnotator {
   }
 
   // pure function
-  _insert(str1: string, str2: string, index: number) {
+  _insert(str1: string, str2: string, index: number): string {
     return str1.slice(0, index) + str2 + str1.slice(index)
   }
 
