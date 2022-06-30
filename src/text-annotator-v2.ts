@@ -146,9 +146,7 @@ class TextAnnotator {
           isCloseTag: false,
           annotationIndex,
         },
-        (a, b) => {
-          return a.index <= b.index ? -1 : 1
-        }
+        (a: {index: number}, b: {index: number}) => a.index <= b.index ? -1 : 1
       )
       _binaryInsert(
         tags,
@@ -158,7 +156,7 @@ class TextAnnotator {
           isCloseTag: true,
           annotationIndex,
         },
-        (a, b) => a.index - b.index
+        (a: {index: number}, b: {index: number}) => a.index - b.index
       )
 
       this.html = _insert(
@@ -272,7 +270,7 @@ class TextAnnotator {
   }
 
   // pure function
-  _binaryInsert(arr: Tag[], val: Tag, comparator: (a: {index: number}, b: {index: number}) => number) {
+  _binaryInsert(arr: unknown[], val: unknown, comparator: (a: unknown, b: unknown) => number) {
     if (arr.length === 0 || comparator(arr[0], val) >= 0) {
       arr.splice(0, 0, val)
       return arr

@@ -96,9 +96,7 @@ class TextAnnotator {
                 length: annotatorOpenTagLength,
                 isCloseTag: false,
                 annotationIndex,
-            }, (a, b) => {
-                return a.index <= b.index ? -1 : 1;
-            });
+            }, (a, b) => a.index <= b.index ? -1 : 1);
             _binaryInsert(tags, {
                 index: annotatorLocation[1],
                 length: annotatorCloseTagLength,
