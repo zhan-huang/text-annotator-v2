@@ -120,7 +120,7 @@ If we want to lightlight *We like eating them.Today we ate then!*, we have to us
 <p>These are apples. <...>We like eating them.</...></p><p><...>Today we ate ten!</...></p>
 ```
 
-2. *text-annotator-v2* offers a "smaller" solution: the compressed file is only 4kb. In contrast, the the compressed file of *text-annotator* is 41kb.
+2. *text-annotator-v2* offers a "smaller" solution: the compressed file is only 4kb. In contrast, the the compressed file of *text-annotator* is 16kb.
 
 ## Contact
 [Zhan Huang](mailto:z2hm@outlook.com "Zhan Huang")
