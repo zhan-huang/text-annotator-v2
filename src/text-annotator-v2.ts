@@ -1,28 +1,6 @@
-type Location = {
-  index: number,
-  length: number
-}
+import type { Location, Tag, SearchOptions, AnnotateOptions, TextAnnotatorInterface } from './@types'
 
-type Tag = Location & {
-  isCloseTag?: boolean,
-  annotationIndex?: number
-}
-
-type SearchOptions = {
-  prefix?: string,
-  postfix?: string,
-  trim?: boolean,
-  caseSensitive?: boolean
-  offset?: number
-}
-
-type AnnotateOptions = {
-  tagName?: string,
-  baseClassName?: string,
-  classPattern?: string
-}
-
-class TextAnnotator {
+class TextAnnotator implements TextAnnotatorInterface {
   private html = ''
   private text = ''
   private tags: Tag[] = []
@@ -245,7 +223,7 @@ class TextAnnotator {
   }
 
   // pure function
-  _stripHTMLTags(html: string): { text: string, tags: Tag[] } {
+  private _stripHTMLTags(html: string): { text: string, tags: Tag[] } {
     let text = html
     const tags = []
     
@@ -265,12 +243,12 @@ class TextAnnotator {
   }
 
   // pure function
-  _insert(str1: string, str2: string, index: number): string {
+  private _insert(str1: string, str2: string, index: number): string {
     return str1.slice(0, index) + str2 + str1.slice(index)
   }
 
   // pure function
-  _binaryInsert(arr: unknown[], val: unknown, comparator: (a: unknown, b: unknown) => number) {
+  private _binaryInsert(arr: unknown[], val: unknown, comparator: (a: unknown, b: unknown) => number) {
     if (arr.length === 0 || comparator(arr[0], val) >= 0) {
       arr.splice(0, 0, val)
       return arr
