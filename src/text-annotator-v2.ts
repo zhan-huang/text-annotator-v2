@@ -1,4 +1,10 @@
-import type { Location, Tag, SearchOptions, AnnotateOptions, TextAnnotatorInterface } from './@types'
+import type {
+  Location,
+  Tag,
+  SearchOptions,
+  AnnotateOptions,
+  TextAnnotatorInterface,
+} from './@types'
 
 class TextAnnotator implements TextAnnotatorInterface {
   private html = ''
@@ -124,7 +130,8 @@ class TextAnnotator implements TextAnnotatorInterface {
           isCloseTag: false,
           annotationIndex,
         },
-        (a: {index: number}, b: {index: number}) => a.index <= b.index ? -1 : 1
+        (a: { index: number }, b: { index: number }) =>
+          a.index <= b.index ? -1 : 1
       )
       _binaryInsert(
         tags,
@@ -134,7 +141,7 @@ class TextAnnotator implements TextAnnotatorInterface {
           isCloseTag: true,
           annotationIndex,
         },
-        (a: {index: number}, b: {index: number}) => a.index - b.index
+        (a: { index: number }, b: { index: number }) => a.index - b.index
       )
 
       this.html = _insert(
@@ -223,10 +230,10 @@ class TextAnnotator implements TextAnnotatorInterface {
   }
 
   // pure function
-  private _stripHTMLTags(html: string): { text: string, tags: Tag[] } {
+  private _stripHTMLTags(html: string): { text: string; tags: Tag[] } {
     let text = html
     const tags = []
-    
+
     // elaborate it later
     let tag: RegExpMatchArray
     const tagRegEx = /<[^>]+>/
@@ -248,7 +255,11 @@ class TextAnnotator implements TextAnnotatorInterface {
   }
 
   // pure function
-  private _binaryInsert(arr: unknown[], val: unknown, comparator: (a: unknown, b: unknown) => number) {
+  private _binaryInsert(
+    arr: unknown[],
+    val: unknown,
+    comparator: (a: unknown, b: unknown) => number
+  ) {
     if (arr.length === 0 || comparator(arr[0], val) >= 0) {
       arr.splice(0, 0, val)
       return arr
